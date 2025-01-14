@@ -12,26 +12,27 @@
  3) Implement mirroring of Binary search tree (horizontal flip). So if previously the tree was storing values in ascending order, after the mirroring it will keep the same values in descending order. Implement mirroring in 2 ways - recursive and iterative.
  */
 
+template <typename T>
 class BinarySearchTreeNode {
     
     BinarySearchTreeNode *left;
     BinarySearchTreeNode *right;
     BinarySearchTreeNode *parent;
-    int _value;
+    T _value;
     
 public:
     BinarySearchTreeNode(int elem) {
         
     }
     
-    void insert(int value);
-    BinarySearchTreeNode* search(int value);
+    void insert(T value);
+    BinarySearchTreeNode* search(T value);
     bool isBinaryTree();
     
-    int findMaximalValue();
-    int findMinimalValue();
-    void deleteNode(int value);
+    T findMaximalValue();
+    T findMinimalValue();
+    void deleteNode(T value);
     
-    int value();
+    T value();
     
 };

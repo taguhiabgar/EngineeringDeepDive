@@ -7,11 +7,13 @@
 
 #include "BinarySearchTree.h"
 
-int BinarySearchTreeNode::value() {
+template <typename T>
+T BinarySearchTreeNode<T>::value() {
     return _value;
 }
 
-void BinarySearchTreeNode::insert(int elem) {
+template <typename T>
+void BinarySearchTreeNode<T>::insert(T elem) {
     if (elem < _value) {
         if (!left) {
             left = new BinarySearchTreeNode(elem);
@@ -27,7 +29,8 @@ void BinarySearchTreeNode::insert(int elem) {
     }
 }
 
-BinarySearchTreeNode* BinarySearchTreeNode::search(int elem) {
+template <typename T>
+BinarySearchTreeNode<T>* BinarySearchTreeNode<T>::search(T elem) {
     if (elem == _value) {
         return this;
     } else if (elem < _value) {
@@ -43,7 +46,8 @@ BinarySearchTreeNode* BinarySearchTreeNode::search(int elem) {
     }
 }
 
-bool BinarySearchTreeNode::isBinaryTree() {
+template <typename T>
+bool BinarySearchTreeNode<T>::isBinaryTree() {
     if (left) {
         if (left->value() > _value) {
             return false;
@@ -60,21 +64,24 @@ bool BinarySearchTreeNode::isBinaryTree() {
     return isLeftBST && isRightBST;
 }
 
-int BinarySearchTreeNode::findMaximalValue() {
+template <typename T>
+T BinarySearchTreeNode<T>::findMaximalValue() {
     if (!right) {
         return _value;
     }
     return right->findMaximalValue();
 }
 
-int BinarySearchTreeNode::findMinimalValue() {
+template <typename T>
+T BinarySearchTreeNode<T>::findMinimalValue() {
     if (left) {
         return _value;
     }
     return left->findMinimalValue();
 }
 
-void BinarySearchTreeNode::deleteNode(int elem) {
+template <typename T>
+void BinarySearchTreeNode<T>::deleteNode(T elem) {
     // removal cases:
     // 1. is a leaf
     // 2. has only 1 subtree

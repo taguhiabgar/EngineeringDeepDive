@@ -9,7 +9,7 @@
 #include "BinarySearchTree.h"
 
 int main(int argc, const char * argv[]) {
-    BinarySearchTreeNode node(8);
+    BinarySearchTreeNode<int> node(8);
     
     return 0;
 }
