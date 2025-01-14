@@ -21,12 +21,11 @@ class BinarySearchTreeNode {
     T _value;
     
 public:
-    BinarySearchTreeNode(int elem) {
-        
-    }
+    BinarySearchTreeNode(T elem);
     
-    void insert(T value);
+    BinarySearchTreeNode* insert(T value, T* parentPtr = nullptr);
     BinarySearchTreeNode* search(T value);
+    void mirror();
     bool isBinaryTree();
     
     T findMaximalValue();
