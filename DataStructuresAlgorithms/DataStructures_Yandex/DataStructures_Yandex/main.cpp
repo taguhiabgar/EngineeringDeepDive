@@ -24,7 +24,7 @@ int main(int argc, const char * argv[]) {
 //    root->deleteNode(5); // Deletes node with value 5
 //    root->deleteNode(15); // Deletes node with value 15
     
-    HashTable hashTable(20);
+    HashTable hashTable(hashPoint3D, 20);
     
     hashTable.insert(Point3D(1, 2, 3));
     hashTable.insert(Point3D(1, 1, 3));
