@@ -12,6 +12,8 @@
  3) Implement mirroring of Binary search tree (horizontal flip). So if previously the tree was storing values in ascending order, after the mirroring it will keep the same values in descending order. Implement mirroring in 2 ways - recursive and iterative.
  */
 
+#include <vector>
+
 template <typename T>
 class BinarySearchTreeNode {
     
@@ -32,6 +34,25 @@ public:
     T findMinimalValue();
     void deleteNode(T value);
     
+    BinarySearchTreeNode<T>* preOrderNextNode(BinarySearchTreeNode<T>* node);
+    BinarySearchTreeNode* inOrderPredecessor();
+    
+    int minLeafDepthInternal(int depth);
+    int maxLeafDepthInternal(int depth);
+    
+    int minLeafDepth();
+    int maxLeafDepth();
+    
     T value();
     
 };
+
+template <typename T>
+BinarySearchTreeNode<T>* batchConstruction(const std::vector<T>& values);
+
+
+//2) Write a function which will calculate "balanceness" of provided Binary
+//tree. Balanceness here is the ratio between depth of the leaf closest to
+//root and depth of the leaf farthest from root.
+template <typename T>
+double balanceness(BinarySearchTreeNode<T>* root);

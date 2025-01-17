@@ -154,18 +154,139 @@ void BinarySearchTreeNode<T>::deleteNode(T elem) {
         delete node;
         node = nullptr;
     } else {
-//        // has 2 subtrees
-//        BinarySearchTreeNode<T>* successor = node->right;
-//        while (successor->left) {
-//            successor = successor->left;
-//        }
-//        // Replace target's value with successor's value
-//        node->_value = successor->_value;
-//        // Delete the successor node (successor will have at most one child)
-//        successor->deleteNode(successor->_value);
+        // has 2 subtrees
+        BinarySearchTreeNode<T>* successor = node->right;
+        while (successor->left) {
+            successor = successor->left;
+        }
+        // Replace target's value with successor's value
+        node->_value = successor->_value;
+        // Delete the successor node (successor will have at most one child)
+        successor->deleteNode(successor->_value);
     }
-    
-    
 }
 
+//1) Design and implement algorithm for iterative pre-order traversal. So
+//given a node, if finds the pre-order next node.
+//Reminder: during preorder traversal,
+//• at first we mention root node, then
+//• do recursive pre-order traversal of left subtree (if present)
+//• do recursive pre-order traversal of right subtree (if present).
+template <typename T>
+BinarySearchTreeNode<T>* BinarySearchTreeNode<T>::preOrderNextNode(BinarySearchTreeNode<T>* item) {
+    if (!item) {
+        return nullptr;
+    }
+    T value = item->value();
+    if (item->left) {
+        return item->left;
+    }
+    if (item->right) {
+        return item->right;
+    }
+    // if achieved this point, item is a leaf node
+    if (!item->parent) {
+        return nullptr;
+    }
+    if (item->parent->right && item->parent->right != value) {
+        return item->parent->right;
+    }
+    BinarySearchTreeNode<T>* node = item;
+    while (node->parent && (!node->parent->right || node->parent->right <= value)) {
+        node = node->parent;
+    }
+    if (node->parent && node->parent->right && node->parent->right > value) {
+        return node->parent->right;
+    }
+    return nullptr;
+}
 
+template <typename T>
+int BinarySearchTreeNode<T>::minLeafDepthInternal(int depth) {
+    if (!left && !right) {
+        return depth;
+    }
+    if (!left) {
+        return right->minLeafDepthInternal(depth + 1);
+    }
+    if (!right) {
+        return left->minLeafDepthInternal(depth + 1);
+    }
+    // left && right
+    int leftMinDepth = left->minLeafDepthInternal(depth);
+    int rightMinDepth = right->minLeafDepthInternal(depth);
+    return std::min(leftMinDepth, rightMinDepth);
+}
+
+template <typename T>
+int BinarySearchTreeNode<T>::maxLeafDepthInternal(int depth) {
+    if (!left && !right) {
+        return depth;
+    }
+    if (!left) {
+        return right->maxLeafDepthInternal(depth + 1);
+    }
+    if (!right) {
+        return left->maxLeafDepthInternal(depth + 1);
+    }
+    // left && right
+    int leftMinDepth = left->maxLeafDepthInternal(depth);
+    int rightMinDepth = right->maxLeafDepthInternal(depth);
+    return std::max(leftMinDepth, rightMinDepth);
+}
+
+template <typename T>
+int BinarySearchTreeNode<T>::minLeafDepth() {
+    return minLeafDepthInternal(1);
+}
+
+template <typename T>
+int BinarySearchTreeNode<T>::maxLeafDepth() {
+    return maxLeafDepthInternal(1);
+}
+
+//2) Write a function which will calculate "balanceness" of provided Binary
+//tree. Balanceness here is the ratio between depth of the leaf closest to
+//root and depth of the leaf farthest from root.
+template <typename T>
+double balanceness(BinarySearchTreeNode<T>* root) {
+    int minDepth = root->minLeafDepth();
+    int maxDepth = root->maxLeafDepth();
+    return static_cast<double>(minDepth) / maxDepth;
+}
+
+template <typename T>
+BinarySearchTreeNode<T>* BinarySearchTreeNode<T>::inOrderPredecessor() {
+    BinarySearchTreeNode<T>* node = this;
+    T val = node->value();
+    if (node && node->left) {
+        // return maximal element in left subtree
+        return findMaximalValue(node->left);
+    }
+    while (node->parent && node->parent->value() < val) {
+        node = node->parent;
+    }
+    if (node->value() == val) {
+        return nullptr;
+    }
+    return node;
+}
+
+template <typename T>
+BinarySearchTreeNode<T>* batchConstructionInternal(std::vector<T> values, int start, int end) {
+    int medianIndex = (start + end) / 2;
+    T median = values[medianIndex];
+    BinarySearchTreeNode<T>* root = new BinarySearchTreeNode<T>(median(values));
+    root->left = batchConstructionInternal<T>(values, 0, medianIndex);
+    root->right = batchConstructionInternal<T>(values, medianIndex + 1, end);
+    return root;
+}
+
+template <typename T>
+BinarySearchTreeNode<T>* batchConstruction(std::vector<T> values) {
+    if (values.empty()) {
+        return nullptr;
+    }
+    std::sort(values.begin(), values.end());
+    return batchConstructionInternal(values, 0, values.size());
+}
