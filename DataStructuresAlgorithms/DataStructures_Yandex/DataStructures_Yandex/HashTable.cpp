@@ -20,3 +20,18 @@ void HashTable::insert(const Point3D& point) {
     int index = hash % data.size();
     data[index].insert(data[index].begin(), point);
 }
+
+void HashTable::remove(Point3D& point) {
+    if (!hashFunction) {
+        return;
+    }
+    
+    int hash = hashFunction(point);
+    int index = hash % data.size();
+    
+    for (Point3D& item : data[index]) {
+        if (item == point) {
+            data[index].remove(item);
+        }
+    }
+}
