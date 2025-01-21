@@ -1,6 +1,6 @@
 Welcome to the EngineeringDeepDive wiki!
 
-# Contents:
+# Contents
 Module 1: Concurrency
 
 Module 2: DSA - Data Structures and Algorithms
