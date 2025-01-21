@@ -14,3 +14,7 @@ Point3D::Point3D(int x, int y, int z) : x(x), y(y), z(z) {
 int hashPoint3D(const Point3D& point) {
     return point.x * 929 + point.y * 401 + point.z * 137;
 }
+
+bool operator==(const Point3D& a, const Point3D& b) {
+    return a.x == b.x && a.y == b.y && a.z == b.z;
+}

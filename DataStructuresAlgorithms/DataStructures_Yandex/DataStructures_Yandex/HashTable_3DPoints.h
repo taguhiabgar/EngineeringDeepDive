@@ -21,4 +21,6 @@ public:
 
 int hashPoint3D(const Point3D& point);
 
+bool operator==(const Point3D& a, const Point3D& b);
+
 #endif /* HashTable_3DPoints_hpp */
