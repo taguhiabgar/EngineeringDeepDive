@@ -10,6 +10,8 @@ Welcome to the EngineeringDeepDive wiki!
 
 ## Module 3: Object-Oriented Design and Analysis
 
+[SOLID Principles](https://github.com/taguhiabgar/EngineeringDeepDive/wiki/SOLID-Principles)
+
 ## Module 4: C++ Templates
 
 - Function templates. Class templates. Template specialization and partial specialization.
