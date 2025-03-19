@@ -14,6 +14,9 @@ struct ct_push_front
 };
 
 
+
+
+
 // A bit more complex example, which requires O(N) instantiations:
 
 
@@ -43,6 +46,20 @@ struct ct_remove< ct_empty_sequence, X >
 {
 	// Filtering an empty sequence leaves it untouched.
 	typedef ct_empty_sequence type;
+};
+
+// Exercise: ct_push_back
+template< typename Sequence, int X >
+struct ct_push_back
+{
+    typedef ct_sequence<
+            Sequence::head,
+            typename ct_push_back< Sequence::body_type, X >::type type;
+};
+
+template< int X >
+struct ct_push_back< ct_empty_sequence, X > {
+    typedef ct_sequence< X, ct_empty_sequence > type;
 };
 
 
