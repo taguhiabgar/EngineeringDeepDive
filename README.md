@@ -1,5 +1,3 @@
-Welcome to the EngineeringDeepDive wiki!
-
 # Contents
 ## Module 1: Concurrency
 
