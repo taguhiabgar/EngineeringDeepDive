@@ -3,7 +3,7 @@
 
 ## Module 2: DSA - Data Structures and Algorithms
 - [BST - Binary Search Tree](https://github.com/taguhiabgar/EngineeringDeepDive/wiki/BST-%E2%80%90-Binary-Search-Tree)
-- Hash Tables
+- [Hash Tables](https://github.com/taguhiabgar/EngineeringDeepDive/wiki/Hash-Table)
 - [Dynamic Programming (DP) and Memoization](https://github.com/taguhiabgar/EngineeringDeepDive/wiki/Dynamic-Programming-and-Memoization)
 
 ## Module 3: Object-Oriented Design and Analysis
